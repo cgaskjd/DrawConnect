@@ -58,3 +58,9 @@ coverage/
 # Downloads (large binary files)
 web-app/public/downloads/*.exe
 web-app/public/downloads/*.msi
+backend/downloads/*.zip
+backend/downloads/*.AppImage
+backend/downloads/*.deb
+backend/downloads/*.exe
+backend/downloads/*.msi
+backend/downloads/*.dmg

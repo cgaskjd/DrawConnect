@@ -27,6 +27,9 @@ app.use('/plugins', (req, res, next) => { loadRoutes(); pluginRoutes(req, res, n
 // Serve static files for plugin uploads
 app.use('/uploads/plugins', express.static('uploads/plugins'));
 
+// Serve static files for downloads (installers)
+app.use('/downloads', express.static('downloads'));
+
 // MongoDB 异步连接 - 不阻塞服务器启动
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/drawconnect', {
     maxPoolSize: 10,

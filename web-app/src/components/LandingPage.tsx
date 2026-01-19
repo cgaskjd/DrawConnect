@@ -235,12 +235,22 @@ export default function LandingPage() {
             </div>
             <h3>Linux</h3>
             <p>Ubuntu 20.04+ / Fedora 35+</p>
-            <span className="btn btn-disabled">
-              .AppImage - 即将推出
-            </span>
-            <span className="btn btn-disabled">
-              .deb 包 - 即将推出
-            </span>
+            <a href="/downloads/DrawConnect_0.1.6_amd64.AppImage" className="btn btn-primary" download>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              AppImage 便携版
+            </a>
+            <a href="/downloads/drawconnect_0.1.6_amd64.deb" className="btn btn-secondary" download>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              DEB 安装包
+            </a>
           </div>
         </div>
 
