@@ -1,0 +1,15 @@
+# Cargo 配置 - 加速编译
+
+[build]
+jobs = 8
+
+[profile.dev]
+opt-level = 0
+debug = 0
+incremental = true
+
+[profile.dev.package."*"]
+opt-level = 2
+
+[registries.crates-io]
+protocol = "sparse"

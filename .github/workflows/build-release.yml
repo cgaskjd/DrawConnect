@@ -1,0 +1,105 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to build (e.g., 0.1.6)'
+        required: true
+        default: '0.1.6'
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build-tauri:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: 'macos-latest'
+            args: '--target aarch64-apple-darwin'
+            name: 'macOS-ARM64'
+          - platform: 'macos-latest'
+            args: '--target x86_64-apple-darwin'
+            name: 'macOS-Intel'
+          - platform: 'ubuntu-22.04'
+            args: ''
+            name: 'Linux'
+          - platform: 'windows-latest'
+            args: ''
+            name: 'Windows'
+
+    runs-on: ${{ matrix.platform }}
+    name: Build ${{ matrix.name }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: desktop-app/package-lock.json
+
+      - name: Install Rust stable
+        uses: dtolnay/rust-action@stable
+        with:
+          targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
+
+      - name: Install dependencies (Ubuntu only)
+        if: matrix.platform == 'ubuntu-22.04'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.0-dev libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
+
+      - name: Install frontend dependencies
+        working-directory: desktop-app
+        run: npm ci
+
+      - name: Build Tauri app
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          projectPath: desktop-app
+          args: ${{ matrix.args }}
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: DrawConnect-${{ matrix.name }}
+          path: |
+            desktop-app/src-tauri/target/release/bundle/**/*.dmg
+            desktop-app/src-tauri/target/release/bundle/**/*.app
+            desktop-app/src-tauri/target/release/bundle/**/*.deb
+            desktop-app/src-tauri/target/release/bundle/**/*.AppImage
+            desktop-app/src-tauri/target/release/bundle/**/*.msi
+            desktop-app/src-tauri/target/release/bundle/**/*-setup.exe
+            desktop-app/src-tauri/target/aarch64-apple-darwin/release/bundle/**/*.dmg
+            desktop-app/src-tauri/target/x86_64-apple-darwin/release/bundle/**/*.dmg
+
+  create-release:
+    needs: build-tauri
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: artifacts/**/*
+          draft: true
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

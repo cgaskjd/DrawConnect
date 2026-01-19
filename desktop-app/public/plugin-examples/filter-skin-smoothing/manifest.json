@@ -1,0 +1,82 @@
+{
+  "id": "com.drawconnect.skin-smoothing-filter",
+  "name": "皮肤磨皮滤镜",
+  "version": "1.0.0",
+  "apiVersion": "1.0",
+  "description": "专业的人像皮肤磨皮滤镜，自动检测肤色并应用自然平滑效果，同时保留皮肤纹理细节。基于双边滤波算法实现边缘保持的平滑效果。",
+  "author": {
+    "name": "DrawConnect Community",
+    "email": "community@drawconnect.com"
+  },
+  "license": "MIT",
+  "type": "filter",
+  "runtime": "javascript",
+  "main": "main.js",
+  "permissions": [
+    "canvas:read",
+    "canvas:write",
+    "filter:register",
+    "filter:apply",
+    "layer:read",
+    "layer:pixels",
+    "history:access",
+    "ui:dialog"
+  ],
+  "capabilities": {
+    "brushes": [],
+    "filters": [
+      {
+        "id": "skin-smoothing",
+        "name": "皮肤磨皮",
+        "category": "人像美化"
+      },
+      {
+        "id": "skin-smoothing-light",
+        "name": "轻度磨皮",
+        "category": "人像美化"
+      },
+      {
+        "id": "skin-smoothing-strong",
+        "name": "强力磨皮",
+        "category": "人像美化"
+      }
+    ],
+    "tools": [],
+    "panels": []
+  },
+  "settings": {
+    "schema": {
+      "type": "object",
+      "properties": {
+        "smoothingStrength": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "default": 50,
+          "description": "磨皮强度 (0-100)"
+        },
+        "preserveDetails": {
+          "type": "boolean",
+          "default": true,
+          "description": "保留皮肤纹理细节"
+        },
+        "skinToneRange": {
+          "type": "string",
+          "enum": ["auto", "light", "medium", "dark"],
+          "default": "auto",
+          "description": "肤色范围检测"
+        },
+        "edgePreservation": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "default": 70,
+          "description": "边缘保持强度"
+        }
+      }
+    }
+  },
+  "locales": ["zh", "en"],
+  "keywords": ["portrait", "skin", "beauty", "smoothing", "retouch", "filter", "bilateral"],
+  "category": "Filters"
+}

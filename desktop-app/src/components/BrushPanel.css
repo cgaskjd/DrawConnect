@@ -1,0 +1,188 @@
+.brush-panel {
+  flex: 0 0 auto;
+}
+
+.brush-panel .panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brush-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.brush-setting {
+  margin-bottom: 18px;
+}
+
+.brush-setting label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.brush-setting label span {
+  font-family: 'SF Mono', 'Cascadia Code', monospace;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  font-size: 10px;
+}
+
+.setting-input-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.setting-input {
+  width: 50px;
+  padding: 4px 6px;
+  font-size: 11px;
+  font-family: 'SF Mono', 'Cascadia Code', monospace;
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  text-align: right;
+  transition: all var(--transition-fast);
+}
+
+.setting-input:hover {
+  border-color: var(--border-hover);
+}
+
+.setting-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-soft);
+}
+
+.setting-input::-webkit-inner-spin-button,
+.setting-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.setting-input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.setting-unit {
+  font-size: 10px;
+  color: var(--text-muted);
+  min-width: 16px;
+}
+
+.brush-presets {
+  margin-top: 16px;
+}
+
+.brush-presets-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.brush-presets-header::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--border), transparent);
+}
+
+.brush-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 220px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.brush-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border-radius: var(--radius-md);
+  font-size: 12px;
+  text-align: left;
+  transition: all var(--transition-normal);
+  border: 1px solid transparent;
+}
+
+.brush-item:hover {
+  background: var(--bg-elevated);
+  border-color: var(--border);
+  transform: translateX(4px);
+}
+
+.brush-item.active {
+  background: linear-gradient(135deg, var(--accent-soft), rgba(245, 158, 11, 0.05));
+  border-color: var(--accent);
+  box-shadow: 0 0 10px var(--accent-glow);
+}
+
+.brush-item.active .brush-name {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.brush-preview {
+  width: 28px;
+  height: 28px;
+  background: linear-gradient(135deg, var(--text-primary), var(--text-secondary));
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.brush-preview::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 4px;
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: var(--radius-full);
+}
+
+.brush-name {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 笔刷大小预览指示器 */
+.brush-size-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.brush-size-circle {
+  background: var(--text-primary);
+  border-radius: var(--radius-full);
+  transition: all var(--transition-normal);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}

@@ -1,0 +1,60 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+build/
+dist/
+dist-installers/
+target/
+*.exe
+*.msi
+*.dmg
+*.deb
+*.AppImage
+
+# Invalid files
+nul
+
+# Gradle
+.gradle/
+gradle/
+gradlew
+gradlew.bat
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Tauri
+desktop-app/src-tauri/target/
+
+# Temp files
+*.tmp
+*.temp
+
+# Test coverage
+coverage/
+
+# Cache
+.cache/
+.parcel-cache/
+
+# Downloads (large binary files)
+web-app/public/downloads/*.exe
+web-app/public/downloads/*.msi

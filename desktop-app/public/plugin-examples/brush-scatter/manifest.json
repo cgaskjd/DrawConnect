@@ -1,0 +1,67 @@
+{
+  "id": "com.example.scatter-brush",
+  "name": "散点笔刷",
+  "version": "1.0.0",
+  "apiVersion": "1.0",
+  "description": "一个示例笔刷插件，展示如何创建自定义散点笔刷",
+  "author": {
+    "name": "DrawConnect Team",
+    "email": "dev@example.com"
+  },
+  "license": "MIT",
+  "type": "brush",
+  "runtime": "javascript",
+  "main": "main.js",
+  "permissions": [
+    "canvas:read",
+    "canvas:write",
+    "brush:register",
+    "brush:render"
+  ],
+  "capabilities": {
+    "brushes": [
+      {
+        "id": "scatter-dots",
+        "name": "散点圆点",
+        "category": "特效笔刷"
+      },
+      {
+        "id": "scatter-stars",
+        "name": "散点星星",
+        "category": "特效笔刷"
+      },
+      {
+        "id": "spray-paint",
+        "name": "喷漆效果",
+        "category": "特效笔刷"
+      }
+    ],
+    "filters": [],
+    "tools": [],
+    "panels": []
+  },
+  "settings": {
+    "schema": {
+      "type": "object",
+      "properties": {
+        "scatter": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "default": 50,
+          "description": "散布程度"
+        },
+        "count": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 50,
+          "default": 10,
+          "description": "每次绘制的点数"
+        }
+      }
+    }
+  },
+  "locales": ["zh", "en"],
+  "keywords": ["brush", "scatter", "spray", "paint"],
+  "category": "Brushes"
+}

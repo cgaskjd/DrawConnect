@@ -1,0 +1,22 @@
+# Cargo 配置 - 加速编译
+
+[build]
+# 增加并行编译任务数
+jobs = 8
+
+[profile.dev]
+# 开发模式：最小优化，最快编译
+opt-level = 0
+debug = 0
+incremental = true
+
+[profile.dev.package."*"]
+# 依赖库使用优化，提升运行时性能
+opt-level = 2
+
+[target.x86_64-pc-windows-msvc]
+# Windows MSVC 链接器优化
+rustflags = ["-C", "target-feature=+crt-static"]
+
+[registries.crates-io]
+protocol = "sparse"

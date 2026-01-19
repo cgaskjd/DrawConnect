@@ -1,0 +1,158 @@
+.toolbar {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 8px;
+  gap: 6px;
+  align-items: center;
+}
+
+.toolbar-divider {
+  width: 32px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  margin: 8px 0;
+}
+
+.toolbar-btn {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: var(--text-secondary);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.toolbar-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, var(--accent-soft), transparent 70%);
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all var(--transition-normal);
+}
+
+.toolbar-btn:hover {
+  color: var(--text-primary);
+  transform: scale(1.05);
+}
+
+.toolbar-btn:hover::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.toolbar-btn:active {
+  transform: scale(0.95);
+}
+
+.toolbar-btn.active {
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+  color: #1c1917;
+  box-shadow: var(--shadow-md), 0 0 15px var(--accent-glow);
+}
+
+.toolbar-btn.active::before {
+  display: none;
+}
+
+.toolbar-btn.active::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+  border-radius: inherit;
+  z-index: -1;
+  filter: blur(8px);
+  opacity: 0.5;
+}
+
+/* 工具提示 */
+.toolbar-btn[title] {
+  position: relative;
+}
+
+.toolbar-btn[title]::after {
+  content: attr(title);
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 12px;
+  padding: 6px 12px;
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  font-size: 11px;
+  white-space: nowrap;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-normal);
+  z-index: 100;
+}
+
+.toolbar-btn.active[title]::after {
+  display: none;
+}
+
+.toolbar-btn[title]:hover::after {
+  opacity: 1;
+}
+
+/* 工具分组标签 */
+.toolbar-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 4px 0;
+}
+
+.toolbar-group-label {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 4px 0;
+}
+
+/* 选区模式按钮组 */
+.selection-mode-group {
+  display: flex;
+  flex-direction: row;
+  gap: 2px;
+  padding: 2px;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+}
+
+.toolbar-btn.small {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+}
+
+.toolbar-btn.small:hover {
+  transform: scale(1.02);
+}
+
+.toolbar-btn.small.active {
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+  color: #1c1917;
+  box-shadow: none;
+}
+
+.toolbar-btn.small.active::after {
+  display: none;
+}
+
+.toolbar-divider.small {
+  width: 24px;
+  margin: 4px 0;
+}

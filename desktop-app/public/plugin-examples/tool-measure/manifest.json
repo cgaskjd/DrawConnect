@@ -1,0 +1,77 @@
+{
+  "id": "com.example.measure-tool",
+  "name": "测量工具",
+  "version": "1.0.0",
+  "apiVersion": "1.0",
+  "description": "一个示例工具插件，提供测量距离和角度的功能",
+  "author": {
+    "name": "DrawConnect Team",
+    "email": "dev@example.com"
+  },
+  "license": "MIT",
+  "type": "tool",
+  "runtime": "javascript",
+  "main": "main.js",
+  "permissions": [
+    "canvas:read",
+    "tool:register",
+    "ui:panel",
+    "ui:dialog"
+  ],
+  "capabilities": {
+    "brushes": [],
+    "filters": [],
+    "tools": [
+      {
+        "id": "ruler",
+        "name": "标尺工具",
+        "icon": "ruler-icon.svg"
+      },
+      {
+        "id": "protractor",
+        "name": "量角器",
+        "icon": "protractor-icon.svg"
+      },
+      {
+        "id": "grid-overlay",
+        "name": "网格叠加",
+        "icon": "grid-icon.svg"
+      }
+    ],
+    "panels": [
+      {
+        "id": "measure-info",
+        "name": "测量信息",
+        "position": "right"
+      }
+    ]
+  },
+  "settings": {
+    "schema": {
+      "type": "object",
+      "properties": {
+        "unit": {
+          "type": "string",
+          "enum": ["px", "cm", "in"],
+          "default": "px",
+          "description": "测量单位"
+        },
+        "gridSize": {
+          "type": "number",
+          "minimum": 10,
+          "maximum": 200,
+          "default": 50,
+          "description": "网格大小"
+        },
+        "showLabel": {
+          "type": "boolean",
+          "default": true,
+          "description": "显示测量标签"
+        }
+      }
+    }
+  },
+  "locales": ["zh", "en"],
+  "keywords": ["tool", "measure", "ruler", "grid"],
+  "category": "Tools"
+}

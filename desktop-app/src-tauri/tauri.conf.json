@@ -1,0 +1,117 @@
+{
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "beforeBuildCommand": "npm run build",
+    "devPath": "http://localhost:5173",
+    "distDir": "../dist"
+  },
+  "package": {
+    "productName": "DrawConnect",
+    "version": "0.1.6"
+  },
+  "tauri": {
+    "allowlist": {
+      "all": false,
+      "shell": {
+        "all": false,
+        "open": true
+      },
+      "dialog": {
+        "all": true,
+        "ask": true,
+        "confirm": true,
+        "message": true,
+        "open": true,
+        "save": true
+      },
+      "fs": {
+        "all": true,
+        "readFile": true,
+        "writeFile": true,
+        "readDir": true,
+        "copyFile": true,
+        "createDir": true,
+        "removeDir": true,
+        "removeFile": true,
+        "renameFile": true,
+        "exists": true
+      },
+      "path": {
+        "all": true
+      },
+      "window": {
+        "all": true
+      }
+    },
+    "bundle": {
+      "active": true,
+      "targets": "all",
+      "identifier": "com.drawconnect.app",
+      "icon": [
+        "icons/32x32.png",
+        "icons/128x128.png",
+        "icons/128x128@2x.png",
+        "icons/icon.icns",
+        "icons/icon.ico"
+      ],
+      "resources": [],
+      "shortDescription": "专业数字绘画软件",
+      "longDescription": "DrawConnect 是一款跨平台专业数字绘画和插画软件。",
+      "category": "Graphics and Design",
+      "copyright": "Copyright 2024 DrawConnect Team",
+      "windows": {
+        "certificateThumbprint": null,
+        "digestAlgorithm": "sha256",
+        "timestampUrl": "",
+        "wix": null,
+        "nsis": {
+          "installerIcon": "icons/icon.ico",
+          "headerImage": null,
+          "sidebarImage": null,
+          "installMode": "currentUser",
+          "languages": ["SimpChinese", "English"],
+          "displayLanguageSelector": true,
+          "shortcutName": "DrawConnect",
+          "createDesktopShortcut": true,
+          "createStartMenuShortcut": true
+        }
+      },
+      "macOS": {
+        "entitlements": null,
+        "exceptionDomain": "",
+        "frameworks": [],
+        "minimumSystemVersion": "10.13",
+        "signingIdentity": null,
+        "providerShortName": null
+      },
+      "linux": {
+        "appId": "com.drawconnect.app",
+        "category": "Graphics",
+        "description": "专业数字绘画与修图软件"
+      },
+      "deb": {
+        "depends": []
+      },
+      "appimage": {
+        "bundleMediaFramework": true
+      }
+    },
+    "security": {
+      "csp": null
+    },
+    "windows": [
+      {
+        "fullscreen": false,
+        "resizable": true,
+        "title": "DrawConnect",
+        "width": 1400,
+        "height": 900,
+        "minWidth": 1024,
+        "minHeight": 768,
+        "center": true,
+        "decorations": true,
+        "transparent": false
+      }
+    ]
+  }
+}

@@ -1,0 +1,68 @@
+name: Build Linux
+
+on:
+  workflow_dispatch:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-22.04
+    name: Linux (Ubuntu)
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Rust stable
+        uses: dtolnay/rust-action@stable
+
+      - name: Install Linux dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libwebkit2gtk-4.0-dev \
+            libwebkit2gtk-4.1-dev \
+            libappindicator3-dev \
+            librsvg2-dev \
+            patchelf \
+            libgtk-3-dev
+
+      - name: Install frontend dependencies
+        working-directory: desktop-app
+        run: npm install
+
+      - name: Build frontend
+        working-directory: desktop-app
+        run: npm run build
+
+      - name: Build Tauri app
+        working-directory: desktop-app
+        run: npm run tauri build
+
+      - name: List build outputs
+        run: |
+          echo "=== DEB files ==="
+          find desktop-app/src-tauri/target -name "*.deb" -type f 2>/dev/null || echo "No DEB found"
+          echo "=== AppImage files ==="
+          find desktop-app/src-tauri/target -name "*.AppImage" -type f 2>/dev/null || echo "No AppImage found"
+
+      - name: Upload DEB package
+        uses: actions/upload-artifact@v4
+        with:
+          name: DrawConnect-Linux-deb
+          path: desktop-app/src-tauri/target/release/bundle/deb/*.deb
+          if-no-files-found: warn
+
+      - name: Upload AppImage
+        uses: actions/upload-artifact@v4
+        with:
+          name: DrawConnect-Linux-AppImage
+          path: desktop-app/src-tauri/target/release/bundle/appimage/*.AppImage
+          if-no-files-found: warn

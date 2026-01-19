@@ -1,0 +1,71 @@
+name: Build macOS
+
+on:
+  workflow_dispatch:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build-macos:
+    strategy:
+      matrix:
+        include:
+          - target: aarch64-apple-darwin
+            name: ARM64 (Apple Silicon)
+          - target: x86_64-apple-darwin
+            name: Intel
+
+    runs-on: macos-latest
+    name: macOS ${{ matrix.name }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Rust stable
+        uses: dtolnay/rust-action@stable
+        with:
+          targets: ${{ matrix.target }}
+
+      - name: Install frontend dependencies
+        working-directory: desktop-app
+        run: npm install
+
+      - name: Build frontend
+        working-directory: desktop-app
+        run: npm run build
+
+      - name: Build Tauri app
+        working-directory: desktop-app
+        run: npm run tauri build -- --target ${{ matrix.target }}
+
+      - name: List build outputs
+        run: |
+          echo "=== DMG files ==="
+          find desktop-app/src-tauri/target -name "*.dmg" -type f 2>/dev/null || echo "No DMG found"
+          echo "=== App bundles ==="
+          find desktop-app/src-tauri/target -name "*.app" -type d 2>/dev/null || echo "No .app found"
+
+      - name: Upload DMG
+        uses: actions/upload-artifact@v4
+        with:
+          name: DrawConnect-macOS-${{ matrix.name }}
+          path: |
+            desktop-app/src-tauri/target/${{ matrix.target }}/release/bundle/dmg/*.dmg
+            desktop-app/src-tauri/target/release/bundle/dmg/*.dmg
+          if-no-files-found: warn
+
+      - name: Upload App Bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: DrawConnect-macOS-${{ matrix.name }}-app
+          path: |
+            desktop-app/src-tauri/target/${{ matrix.target }}/release/bundle/macos/*.app
+            desktop-app/src-tauri/target/release/bundle/macos/*.app
+          if-no-files-found: warn

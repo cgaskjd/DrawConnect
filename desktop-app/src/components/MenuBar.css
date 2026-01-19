@@ -1,0 +1,180 @@
+.menu-bar {
+  height: 36px;
+  background: linear-gradient(180deg, var(--bg-tertiary) 0%, var(--bg-secondary) 100%);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  gap: 2px;
+  position: relative;
+}
+
+.menu-bar::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-glow), transparent);
+}
+
+.menu-item {
+  position: relative;
+}
+
+.menu-title {
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-normal);
+}
+
+.menu-title:hover {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+}
+
+.menu-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  min-width: 200px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 6px;
+  z-index: 1000;
+  box-shadow: var(--shadow-lg);
+  animation: dropdown-appear 0.15s ease-out;
+}
+
+@keyframes dropdown-appear {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.menu-item:hover .menu-dropdown {
+  display: block;
+}
+
+.menu-dropdown button {
+  width: 100%;
+  padding: 10px 14px;
+  background: none;
+  color: var(--text-primary);
+  font-size: 12px;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+}
+
+.menu-dropdown button:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+  color: #1c1917;
+}
+
+.menu-dropdown button:disabled {
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+.menu-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  margin: 6px 8px;
+}
+
+.shortcut {
+  color: var(--text-muted);
+  font-size: 11px;
+  font-family: 'SF Mono', 'Cascadia Code', monospace;
+  background: var(--bg-primary);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+}
+
+.menu-dropdown button:hover:not(:disabled) .shortcut {
+  background: rgba(0, 0, 0, 0.2);
+  color: inherit;
+}
+
+/* Submenu styles */
+.menu-submenu {
+  position: relative;
+}
+
+.menu-submenu > span {
+  display: flex;
+  width: 100%;
+  padding: 10px 14px;
+  background: none;
+  color: var(--text-primary);
+  font-size: 12px;
+  text-align: left;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.menu-submenu > span::after {
+  content: '▶';
+  font-size: 8px;
+  color: var(--text-muted);
+}
+
+.menu-submenu:hover > span {
+  background: var(--bg-elevated);
+}
+
+.submenu-dropdown {
+  display: none;
+  position: absolute;
+  left: 100%;
+  top: 0;
+  min-width: 180px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 6px;
+  box-shadow: var(--shadow-lg);
+  animation: dropdown-appear 0.15s ease-out;
+}
+
+.menu-submenu:hover .submenu-dropdown {
+  display: block;
+}
+
+.submenu-dropdown button {
+  width: 100%;
+  padding: 10px 14px;
+  background: none;
+  color: var(--text-primary);
+  font-size: 12px;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+}
+
+.submenu-dropdown button:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+  color: #1c1917;
+}

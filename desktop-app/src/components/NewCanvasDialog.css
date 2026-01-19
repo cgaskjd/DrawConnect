@@ -1,0 +1,217 @@
+.dialog-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn var(--transition-fast) ease-out;
+}
+
+.dialog-content {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  width: 500px;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: scaleIn var(--transition-normal) ease-out;
+}
+
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: linear-gradient(90deg, var(--bg-secondary) 0%, var(--bg-panel) 100%);
+  border-bottom: 1px solid var(--border);
+}
+
+.dialog-header h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.dialog-close {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 20px;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+}
+
+.dialog-close:hover {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.dialog-body {
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group:last-child {
+  margin-bottom: 0;
+}
+
+.form-group > label {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* 预设网格 */
+.preset-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.preset-btn {
+  padding: 10px 12px;
+  background: var(--bg-primary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: 12px;
+  text-align: left;
+  transition: all var(--transition-normal);
+}
+
+.preset-btn:hover {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  border-color: var(--text-muted);
+}
+
+.preset-btn.active {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* 尺寸输入 */
+.dimension-inputs {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dimension-input {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 8px 12px;
+  transition: border-color var(--transition-normal);
+}
+
+.dimension-input:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-soft);
+}
+
+.dimension-label {
+  color: var(--text-muted);
+  font-size: 11px;
+  min-width: 24px;
+}
+
+.dimension-input input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 14px;
+  font-family: 'SF Mono', 'Cascadia Code', monospace;
+  min-width: 60px;
+}
+
+.dimension-input input:focus {
+  outline: none;
+}
+
+.dimension-unit {
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+.swap-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  border-radius: var(--radius-md);
+  font-size: 18px;
+  transition: all var(--transition-normal);
+}
+
+.swap-btn:hover {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+/* 预览 */
+.canvas-preview-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 20px;
+  background: var(--bg-primary);
+  border-radius: var(--radius-md);
+}
+
+.canvas-preview {
+  background: white;
+  border: 2px solid var(--border);
+  border-radius: 2px;
+  box-shadow: var(--shadow-md);
+}
+
+.preview-size {
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-family: 'SF Mono', 'Cascadia Code', monospace;
+}
+
+/* 对话框底部 */
+.dialog-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px 20px;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border);
+}
+
+.dialog-footer .btn {
+  min-width: 80px;
+}

@@ -1,0 +1,86 @@
+[package]
+name = "drawconnect-core"
+version = "0.1.6"
+edition = "2021"
+authors = ["DrawConnect Team"]
+description = "DrawConnect Core Painting Engine - Cross-platform painting engine built with Rust"
+license = "MIT"
+repository = "https://github.com/drawconnect/core-engine"
+
+[lib]
+name = "drawconnect_core"
+crate-type = ["cdylib", "rlib"]
+
+[features]
+default = ["gpu", "native"]
+gpu = ["wgpu", "bytemuck"]
+simd = []
+ffi = []
+native = ["tokio/rt-multi-thread", "rayon", "zstd"]
+wasm = ["uuid/js", "getrandom/js"]
+
+[dependencies]
+# GPU rendering
+wgpu = { version = "0.19", optional = true }
+bytemuck = { version = "1.14", features = ["derive"], optional = true }
+
+# Math and geometry
+glam = { version = "0.25", features = ["serde"] }
+nalgebra = "0.32"
+
+# Image processing
+image = { version = "0.24", default-features = false, features = ["png", "jpeg", "webp"] }
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+bincode = "1.3"
+
+# Async runtime
+tokio = { version = "1.35", features = ["sync", "macros"], default-features = false }
+futures = "0.3"
+
+# Utilities
+uuid = { version = "1.6", features = ["v4", "serde"] }
+thiserror = "1.0"
+log = "0.4"
+parking_lot = "0.12"
+rayon = { version = "1.8", optional = true }
+smallvec = { version = "1.13", features = ["serde"] }
+getrandom = { version = "0.2", optional = true }
+
+# Color management
+palette = "0.7"
+
+# Compression
+lz4_flex = "0.11"
+zstd = { version = "0.13", optional = true }
+zip = "0.6"
+
+[dev-dependencies]
+criterion = "0.5"
+tokio-test = "0.4"
+
+[[bench]]
+name = "brush_benchmark"
+harness = false
+
+[[bench]]
+name = "layer_benchmark"
+harness = false
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+
+# 开发模式优化 - 显著加快编译速度
+[profile.dev]
+opt-level = 0
+debug = false
+incremental = true
+codegen-units = 256
+
+# 依赖库使用优化级别2，平衡性能和编译速度
+[profile.dev.package."*"]
+opt-level = 2
