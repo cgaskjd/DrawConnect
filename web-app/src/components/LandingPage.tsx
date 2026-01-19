@@ -235,7 +235,7 @@ export default function LandingPage() {
             </div>
             <h3>Linux</h3>
             <p>Ubuntu 20.04+ / Fedora 35+</p>
-            <a href="/downloads/DrawConnect_0.1.6_amd64.AppImage" className="btn btn-primary" download>
+            <a href="/downloads/draw-connect_0.1.6_amd64.AppImage" className="btn btn-primary" download>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                 <polyline points="7 10 12 15 17 10" />
@@ -243,7 +243,7 @@ export default function LandingPage() {
               </svg>
               AppImage 便携版
             </a>
-            <a href="/downloads/drawconnect_0.1.6_amd64.deb" className="btn btn-secondary" download>
+            <a href="/downloads/draw-connect_0.1.6_amd64.deb" className="btn btn-secondary" download>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                 <polyline points="7 10 12 15 17 10" />
