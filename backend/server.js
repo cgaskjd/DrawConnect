@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 // Middleware - 使用 express 内置解析器，移除 body-parser 依赖
 app.use(cors());
