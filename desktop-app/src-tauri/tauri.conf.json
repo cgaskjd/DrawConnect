@@ -66,14 +66,9 @@
         "wix": null,
         "nsis": {
           "installerIcon": "icons/icon.ico",
-          "headerImage": null,
-          "sidebarImage": null,
           "installMode": "currentUser",
           "languages": ["SimpChinese", "English"],
-          "displayLanguageSelector": true,
-          "shortcutName": "DrawConnect",
-          "createDesktopShortcut": true,
-          "createStartMenuShortcut": true
+          "displayLanguageSelector": true
         }
       },
       "macOS": {
@@ -83,11 +78,6 @@
         "minimumSystemVersion": "10.13",
         "signingIdentity": null,
         "providerShortName": null
-      },
-      "linux": {
-        "appId": "com.drawconnect.app",
-        "category": "Graphics",
-        "description": "专业数字绘画与修图软件"
       },
       "deb": {
         "depends": []
